@@ -14,7 +14,7 @@
     <fragment
         android:id="@+id/nav_gallery"
         android:name="edu.unicauca.appsmoviles.dulces_popayan_java2.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
+        android:label="Rutas"
         tools:layout="@layout/fragment_gallery" />
 
     <fragment

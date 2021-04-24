@@ -10,4 +10,8 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Dulces Popayán</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="ruta_1">Ruta 1</string>
+    <string name="ruta_2">Ruta 2</string>
+    <string name="ruta_3">Ruta 3</string>
 </resources>
