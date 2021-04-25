@@ -1,22 +1,28 @@
 package edu.unicauca.appsmoviles.dulces_popayan_java2;
 
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
 public class AdapterTienda extends RecyclerView.Adapter<AdapterTienda.viewholdertiendas>  {
 
     List<Tienda> tiendaList;
+    Activity activity;
 
-    public AdapterTienda(List<Tienda> tiendaList) {
+    public AdapterTienda(List<Tienda> tiendaList, Activity activity) {
         this.tiendaList = tiendaList;
+        this.activity = activity;
     }
 
     @NonNull
@@ -35,6 +41,7 @@ public class AdapterTienda extends RecyclerView.Adapter<AdapterTienda.viewholder
 
         holder.tv_nombre.setText(tienda.getNombre());
         holder.tv_descripcion.setText(tienda.getDescripcion());
+        Glide.with(activity).load(tienda.getUrl()).into(holder.imagen);
     }
 
     @Override
@@ -44,11 +51,13 @@ public class AdapterTienda extends RecyclerView.Adapter<AdapterTienda.viewholder
 
     public class viewholdertiendas extends RecyclerView.ViewHolder {
         TextView tv_nombre, tv_descripcion, tv_dulces;
+        ImageView imagen;
         public viewholdertiendas(@NonNull View itemView) {
             super(itemView);
 
             tv_nombre = itemView.findViewById(R.id.tv_nombre);
             tv_descripcion = itemView.findViewById(R.id.tv_descripcion);
+            imagen = itemView.findViewById(R.id.imagen);
 
         }
     }

@@ -50,8 +50,9 @@ public class SlideshowFragment extends Fragment {
         lm = new LinearLayoutManager(getContext());
         rv.setLayoutManager(lm);
         list = new ArrayList<>();
-        adapter = new AdapterTienda(list);
+        adapter = new AdapterTienda(list,getActivity());
         rv.setAdapter(adapter);
+
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -85,19 +86,20 @@ public class SlideshowFragment extends Fragment {
 
         slideshowViewModel =
                 new ViewModelProvider(this).get(SlideshowViewModel.class);
-       /* final TextView textView = root.findViewById(R.id.text_slideshow);
+       final TextView textView = root.findViewById(R.id.text_slideshow);
         slideshowViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
             }
-        });*/
+        });
         return root;
 
 
 
 
     }
+
 
     private void buscar(String newText) {
         ArrayList<Tienda> milista = new ArrayList<>();
@@ -106,7 +108,7 @@ public class SlideshowFragment extends Fragment {
                 milista.add(obj);
             }
         }
-        AdapterTienda adapter  = new AdapterTienda(milista);
+        AdapterTienda adapter  = new AdapterTienda(milista,getActivity());
         rv.setAdapter(adapter);
     }
 }

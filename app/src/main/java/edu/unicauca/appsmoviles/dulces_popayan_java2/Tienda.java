@@ -6,15 +6,25 @@ public class Tienda {
     private int Id;
     private String dulces;
     private String descripcion;
+    private String url;
 
     public Tienda() {
     }
 
-    public Tienda(String nombre, int id, String dulces, String descripcion) {
+    public Tienda(String nombre, int id, String dulces, String descripcion, String url) {
         this.nombre = nombre;
         Id = id;
+        this.url = url;
         this.dulces = dulces;
         this.descripcion = descripcion;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getNombre() {
