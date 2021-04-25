@@ -26,34 +26,40 @@
                 android:src="@drawable/dulcespopa" />
         </LinearLayout>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button"
-            android:layout_width="match_parent"
+            android:layout_width="250dp"
+            android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="5dp"
-            android:background="@android:color/holo_green_dark"
+            android:background="#5C4848"
             android:text="@string/ruta_1" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button2"
-            android:layout_width="match_parent"
+            android:layout_width="250dp"
+            android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="5dp"
-            android:background="@android:color/holo_green_light"
+            android:background="#5C4848"
             android:text="@string/ruta_2" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button3"
-            android:layout_width="match_parent"
+            android:layout_width="250dp"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/white"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="5dp"
-            android:background="@android:color/holo_orange_dark"
+            android:background="#5C4848"
             android:text="@string/ruta_3" />
 
     </LinearLayout>
