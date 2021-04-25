@@ -11,14 +11,12 @@
 
 
 
-
-
     <TextView
         android:id="@+id/descripcion_tienda"
         android:layout_width="329dp"
         android:layout_height="120dp"
         android:layout_marginTop="36dp"
-        android:background="#80ffffff"
+        android:background="#90ffffff"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="@color/black"
@@ -64,7 +62,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="10dp"
-        android:background="#80ffffff"
+        android:background="#90ffffff"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="18sp"
