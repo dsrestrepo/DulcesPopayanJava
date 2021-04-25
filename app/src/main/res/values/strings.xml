@@ -17,4 +17,6 @@
     <string name="inicio">Disfruta de una dulce guía conociendo Popayán</string>
     <string name="hello_blank_fragment">Información</string>
     <string name="see_button">Ver</string>
+    <string name="tienda">Tienda</string>
+
 </resources>
