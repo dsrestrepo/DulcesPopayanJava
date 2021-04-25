@@ -15,4 +15,6 @@
     <string name="ruta_2">Ruta 2</string>
     <string name="ruta_3">Ruta 3</string>
     <string name="inicio">Disfruta de una dulce guía conociendo Popayán</string>
+    <string name="hello_blank_fragment">Información</string>
+    <string name="see_button">Ver</string>
 </resources>

@@ -16,5 +16,10 @@
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/lollipop"
             android:title="@string/menu_slideshow" />
+        <item
+            android:id="@+id/infoFragment"
+            android:icon="@drawable/info"
+            android:title="@string/hello_blank_fragment" />
     </group>
+
 </menu>

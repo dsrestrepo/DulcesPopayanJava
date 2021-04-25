@@ -3,7 +3,7 @@ package edu.unicauca.appsmoviles.dulces_popayan_java2;
 public class Tienda {
 
     private String nombre;
-    private int Id;
+    private String Id;
     private String dulces;
     private String descripcion;
     private String url;
@@ -11,9 +11,9 @@ public class Tienda {
     public Tienda() {
     }
 
-    public Tienda(String nombre, int id, String dulces, String descripcion, String url) {
+    public Tienda(String nombre, String Id, String dulces, String descripcion, String url) {
         this.nombre = nombre;
-        Id = id;
+        this.Id = Id;
         this.url = url;
         this.dulces = dulces;
         this.descripcion = descripcion;
@@ -35,12 +35,12 @@ public class Tienda {
         this.nombre = nombre;
     }
 
-    public int getId() {
+    public String getId() {
         return Id;
     }
 
-    public void setId(int id) {
-        Id = id;
+    public void setId(String Id) {
+        this.Id = Id;
     }
 
     public String getDulces() {

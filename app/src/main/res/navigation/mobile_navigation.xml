@@ -22,4 +22,9 @@
         android:name="edu.unicauca.appsmoviles.dulces_popayan_java2.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
+    <fragment
+        android:id="@+id/infoFragment"
+        android:name="edu.unicauca.appsmoviles.dulces_popayan_java2.infoFragment"
+        android:label="@string/hello_blank_fragment"
+        tools:layout="@layout/fragment_info" />
 </navigation>

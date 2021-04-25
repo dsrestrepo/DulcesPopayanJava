@@ -86,13 +86,13 @@ public class SlideshowFragment extends Fragment {
 
         slideshowViewModel =
                 new ViewModelProvider(this).get(SlideshowViewModel.class);
-       final TextView textView = root.findViewById(R.id.text_slideshow);
+       /*final TextView textView = root.findViewById(R.id.text_slideshow);
         slideshowViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
             }
-        });
+        });*/
         return root;
 
 
