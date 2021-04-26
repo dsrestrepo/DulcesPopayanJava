@@ -1,8 +1,11 @@
 package edu.unicauca.appsmoviles.dulces_popayan_java2;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -14,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -48,6 +52,8 @@ public class LoginFragment extends Fragment {
             // Name, email address, and profile photo Url
             String name = user.getDisplayName();
             String email = ((FirebaseUser) user).getEmail();
+            tv_email.setVisibility(View.INVISIBLE);
+            tv_password.setVisibility(View.INVISIBLE);
 
             username.setText(email);
 
@@ -80,13 +86,7 @@ public class LoginFragment extends Fragment {
                                              Toast toast = Toast.makeText(root.getContext(), text, duration);
                                              toast.show();
 
-                                             FirebaseAuth.getInstance().signOut();
-
-                                             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                                             if (user == null) {
-                                                 username.setText("");
-
-                                             }
+                                             desloguearUsuario();
 
                                          }
                                      }
@@ -128,23 +128,54 @@ public class LoginFragment extends Fragment {
         return root;
     }
 
-    private void loguearUsuario(String email, String password) {
-        mAuth.signInWithEmailAndPassword(email, password);
+    private void desloguearUsuario() {
+        FirebaseAuth.getInstance().signOut();
+
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            // Name, email address, and profile photo Url
+        if (user == null) {
+            username.setText("");
+            login.setText("Login");
 
-            String email2 = ((FirebaseUser) user).getEmail();
 
-            username.setText(email2);
+            // Reload current fragment
+            Intent intent = getActivity().getIntent();
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK
+                    | Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            getActivity().overridePendingTransition(0, 0);
+            getActivity().finish();
 
-            // Check if user's email is verified
-            boolean emailVerified = user.isEmailVerified();
+            getActivity().overridePendingTransition(0, 0);
+            startActivity(intent);
 
-            // The user's ID, unique to the Firebase project. Do NOT use this value to
-            // authenticate with your backend server, if you have one. Use
-            // FirebaseUser.getIdToken() instead.
-            String uid = user.getUid();
         }
+
+    }
+
+    private void loguearUsuario(String email, String password) {
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+
+                if (task.isSuccessful()){
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    if (user != null) {
+
+                        // Reload current fragment
+                        Intent intent = getActivity().getIntent();
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK
+                                | Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                        getActivity().overridePendingTransition(0, 0);
+                        getActivity().finish();
+
+                        getActivity().overridePendingTransition(0, 0);
+                        startActivity(intent);
+
+
+                    }
+
+                }
+            }
+        });
+
     }
 }
