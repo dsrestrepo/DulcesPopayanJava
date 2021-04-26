@@ -18,5 +18,11 @@
     <string name="hello_blank_fragment">Información</string>
     <string name="see_button">Ver</string>
     <string name="tienda">Tienda</string>
+    <string name="register">Registrar</string>
+    <string name="login">Login</string>
+    <string name="email">Correo</string>
+    <string name="password">Contraseña</string>
+    <string name="information">Con la Aplicación Dulces Popayán podrás conocer la cultura y el sabor de los dulces tradicionales
+        de la maravillosa cuidad blanca mientras te dejas encantar por sus calles hermosas, historicas y mágicas. </string>
 
 </resources>

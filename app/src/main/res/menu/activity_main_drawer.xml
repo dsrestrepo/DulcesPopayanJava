@@ -17,9 +17,18 @@
             android:icon="@drawable/lollipop"
             android:title="@string/menu_slideshow" />
         <item
+            android:id="@+id/registerFragment"
+            android:icon="@drawable/edit"
+            android:title="@string/register" />
+        <item
+            android:id="@+id/loginFragment"
+            android:icon="@drawable/user"
+            android:title="@string/login" />
+        <item
             android:id="@+id/infoFragment"
             android:icon="@drawable/info"
             android:title="@string/hello_blank_fragment" />
     </group>
 
 </menu>
+

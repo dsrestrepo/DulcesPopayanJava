@@ -27,4 +27,14 @@
         android:name="edu.unicauca.appsmoviles.dulces_popayan_java2.infoFragment"
         android:label="@string/hello_blank_fragment"
         tools:layout="@layout/fragment_info" />
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="edu.unicauca.appsmoviles.dulces_popayan_java2.RegisterFragment"
+        android:label="@string/register"
+        tools:layout="@layout/fragment_register" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="edu.unicauca.appsmoviles.dulces_popayan_java2.LoginFragment"
+        android:label="@string/login"
+        tools:layout="@layout/fragment_login" />
 </navigation>

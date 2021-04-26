@@ -20,4 +20,11 @@
     <string name="hello_blank_fragment">Information</string>
     <string name="see_button">See</string>
     <string name="tienda">Store</string>
+    <string name="register">Register</string>
+    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="information">With the Application "Dulces Popayán" you will be able to know the culture and the taste of traditional sweets
+    of the wonderful white city while you let yourself be enchanted by its beautiful, historical and magical streets. </string>
+
 </resources>
