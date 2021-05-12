@@ -57,9 +57,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public void maps(GoogleMap googleMap) {
         rutas = getIntent().getExtras();
-        Integer selector = rutas.getInt("ruta");
+        String selector = rutas.getString("ruta");
         miUbicacion();
-        if (selector == 1) {
+        if (selector == "Ruta1") {
 
             //popayan - parque caldas
             LatLng popayan = new LatLng(2.441941, -76.606308);
@@ -86,7 +86,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     .color(Color.RED));
         }
 
-        else if(selector == 2){
+        else if(selector == "Ruta2"){
 
             //morro
             LatLng morro = new LatLng(2.44407, -76.60112);
