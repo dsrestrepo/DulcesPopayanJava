@@ -1,6 +1,7 @@
 package edu.unicauca.appsmoviles.dulces_popayan_java2;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -26,6 +27,13 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -34,7 +42,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private LocationRequest locationRequest;
 
     Bundle rutas;
-
+    DatabaseReference ref;
+    Activity activity;
+    ArrayList<Punto> list;
     private Marker marcador;
     double lat = 0.0;
     double lng = 0.0;
@@ -44,6 +54,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        activity = this;
+
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -56,37 +69,79 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public void maps(GoogleMap googleMap) {
+
+
+
         rutas = getIntent().getExtras();
         String selector = rutas.getString("ruta");
+
+        list = new ArrayList<Punto>();
+        // database
+        ref = FirebaseDatabase.getInstance().getReference().child("Rutas").child(selector).child(selector); // el bueno
+        //ref = FirebaseDatabase.getInstance().getReference().child("Rutas").child("Ruta1").child("Ruta1"); //prueba
+
+        System.out.println(ref);
+        // get database data
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                    for(DataSnapshot dataSnapshot: snapshot.getChildren()){
+                        Punto punto = dataSnapshot.getValue(Punto.class);
+                        System.out.println(punto);
+                        list.add(punto);
+                        System.out.println(list.get(0).getLongitud());
+                        System.out.println(list.get(0).getLatitud());
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+        System.out.println(list.get(0).getLongitud());
+        System.out.println(list.get(0).getLatitud());
+
+
+        //location
         miUbicacion();
-        if (selector == "Ruta1") {
-
-            //popayan - parque caldas
-            LatLng popayan = new LatLng(2.441941, -76.606308);
-            mMap.addMarker(new MarkerOptions().position(popayan).title("Ciudad de Popayán").snippet("Lugar de las dulces rutas"));
-
-            //morro
-            LatLng morro = new LatLng(2.44407, -76.60112);
-            mMap.addMarker(new MarkerOptions().position(morro).title("El Morro").snippet("Mira un atardecer").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
-
-            //caucana de dulces
-            LatLng caucana = new LatLng(2.4432516, -76.6059773);
-            mMap.addMarker(new MarkerOptions().position(caucana).title("Caucana de dulces tipicos").snippet("mmm").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
-
-            //doña chepa
-            LatLng chepa = new LatLng(2.4435641, -76.6039177);
-            mMap.addMarker(new MarkerOptions().position(chepa).title("Aplanchados doña chepa").snippet("mmm").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
 
 
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(popayan, 15));
 
-            Polyline line = mMap.addPolyline(new PolylineOptions()
-                    .add(new LatLng(2.441941, -76.606308), new LatLng(2.442470, -76.606555), new LatLng(2.443301, -76.606278), new LatLng(2.443019, -76.605388), new LatLng(2.443584, -76.605176), new LatLng(2.443782, -76.605098), new LatLng(2.443806, -76.605086), new LatLng(2.443786, -76.604890), new LatLng(2.443808, -76.604846), new LatLng(2.443616, -76.604189), new LatLng(2.443368, -76.603355), new LatLng(2.444216, -76.603054), new LatLng(2.443918, -76.602209), new LatLng(2.443630, -76.601296), new LatLng(2.444077, -76.601203), new LatLng(2.44407, -76.60112))
-                    .width(4)
-                    .color(Color.RED));
-        }
+        //if (selector.equals("Ruta1")) {
 
-        else if(selector == "Ruta2"){
+        //popayan - parque caldas
+        LatLng popayan = new LatLng(2.441941, -76.606308);
+        mMap.addMarker(new MarkerOptions().position(popayan).title("Ciudad de Popayán").snippet("Lugar de las dulces rutas"));
+
+        //morro
+        LatLng morro = new LatLng(2.44407, -76.60112);
+        mMap.addMarker(new MarkerOptions().position(morro).title("El Morro").snippet("Mira un atardecer").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+
+        //caucana de dulces
+        LatLng caucana = new LatLng(2.4432516, -76.6059773);
+        mMap.addMarker(new MarkerOptions().position(caucana).title("Caucana de dulces tipicos").snippet("mmm").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
+
+        //doña chepa
+        LatLng chepa = new LatLng(2.4435641, -76.6039177);
+        mMap.addMarker(new MarkerOptions().position(chepa).title("Aplanchados doña chepa").snippet("mmm").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
+
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(popayan, 15));
+
+        Polyline line = mMap.addPolyline(new PolylineOptions()
+                //.add(new LatLng(list.get(0).getLatitud(), list.get(0).getLongitud()), new LatLng(2.442470, -76.606555), new LatLng(2.443301, -76.606278), new LatLng(2.443019, -76.605388), new LatLng(2.443584, -76.605176), new LatLng(2.443782, -76.605098), new LatLng(2.443806, -76.605086), new LatLng(2.443786, -76.604890), new LatLng(2.443808, -76.604846), new LatLng(2.443616, -76.604189), new LatLng(2.443368, -76.603355), new LatLng(2.444216, -76.603054), new LatLng(2.443918, -76.602209), new LatLng(2.443630, -76.601296), new LatLng(2.444077, -76.601203), new LatLng(2.44407, -76.60112))
+                .add(new LatLng(list.get(0).getLatitud(), list.get(0).getLongitud()), new LatLng(2.442470, -76.606555), new LatLng(2.443301, -76.606278), new LatLng(2.443019, -76.605388), new LatLng(2.443584, -76.605176), new LatLng(2.443782, -76.605098), new LatLng(2.443806, -76.605086), new LatLng(2.443786, -76.604890), new LatLng(2.443808, -76.604846), new LatLng(2.443616, -76.604189), new LatLng(2.443368, -76.603355), new LatLng(2.444216, -76.603054), new LatLng(2.443918, -76.602209), new LatLng(2.443630, -76.601296), new LatLng(2.444077, -76.601203), new LatLng(2.44407, -76.60112))
+                .width(4)
+                .color(Color.RED));
+        //}
+
+/*
+
+        else if(selector.equals("Ruta2")){
 
             //morro
             LatLng morro = new LatLng(2.44407, -76.60112);
@@ -134,6 +189,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     .width(4)
                     .color(Color.RED));
         }
+*/
 
 
 

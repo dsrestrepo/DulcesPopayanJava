@@ -50,7 +50,6 @@ public class DescriptionTienda extends AppCompatActivity {
                 descripcion_tienda.setText(tienda2.getDescripcion());
                 dulces_tienda.setText(tienda2.getDulces());
                 Glide.with(activity).load(tienda2.getUrl()).into(imagen_tienda);
-
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
