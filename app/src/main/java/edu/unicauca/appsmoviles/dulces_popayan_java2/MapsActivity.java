@@ -49,7 +49,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Marker marcador;
     double lat = 0.0;
     double lng = 0.0;
-    MyCallback myCallback;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,13 +59,30 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
 
+
+
+        //System.out.println(list.get(0).getLongitud());
+        //System.out.println(list.get(0).getLatitud());
+
+
+
+
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+
         list = new ArrayList<Punto>();
 
         rutas = getIntent().getExtras();
         String selector = rutas.getString("id");
 
         // database
-       ref = FirebaseDatabase.getInstance().getReference().child("Rutas").child(selector).child(selector); // el bueno
+        ref = FirebaseDatabase.getInstance().getReference().child("Rutas").child(selector).child(selector); // el bueno
         //ref = FirebaseDatabase.getInstance().getReference().child("Rutas").child("Ruta1").child("Ruta1"); //prueba
 /*
         System.out.println(ref);
@@ -83,7 +100,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });*/
 
@@ -97,6 +113,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         list.add(punto);
                         System.out.println(list.get(0).getLongitud());
                     }
+                    mostrar_ruta(googleMap, list);
                 }
             }
             @Override
@@ -105,102 +122,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         };
         ref.addValueEventListener(postListener);
 
-        //System.out.println(list.get(0).getLongitud());
-        //System.out.println(list.get(0).getLatitud());
-
-
-
-
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
     }
 
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-        maps(googleMap);
-    }
-
-    public void maps(GoogleMap googleMap) {
-
-
-
-
-
-
-
-
-
-
+    private void mostrar_ruta(GoogleMap googleMap, ArrayList<Punto> list) {
 
         //location
         miUbicacion();
-
-
-
-        //if (selector.equals("Ruta1")) {
-
-        mostrar_ruta(googleMap);
-        //}
-
-/*
-
-        else if(selector.equals("Ruta2")){
-
-            //morro
-            LatLng morro = new LatLng(2.44407, -76.60112);
-            mMap.addMarker(new MarkerOptions().position(morro).title("El Morro").snippet("Mira un atardecer").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
-
-            //parque caldas
-            LatLng popayan = new LatLng(2.441941, -76.606308);
-            mMap.addMarker(new MarkerOptions().position(popayan).title("Ciudad de Popayán").snippet("Lugar de las dulces rutas").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
-
-            //colonial postres
-            LatLng colonial = new LatLng(2.442674, -76.601308);
-            mMap.addMarker(new MarkerOptions().position(colonial).title("Colonial Postres").snippet("mmm").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
-
-            //El reposo
-            LatLng reposo = new LatLng(2.441729, -76.601977);
-            mMap.addMarker(new MarkerOptions().position(reposo).title("Helado, Fruta y Cafe").snippet("mmm").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
-
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(popayan, 15));
-
-            Polyline line = mMap.addPolyline(new PolylineOptions()
-                    .add(new LatLng(2.44407, -76.60112),new LatLng(2.444077, -76.601203), new LatLng(2.443599, -76.601305), new LatLng(2.441914, -76.601909),new LatLng(2.440225, -76.602497), new LatLng(2.440327, -76.602870), new LatLng(2.440349, -76.602937), new LatLng(2.440487, -76.603367), new LatLng(2.440736, -76.604274), new LatLng(2.441596, -76.603968), new LatLng(2.441864, -76.604823), new LatLng(2.442148, -76.605708),new LatLng(2.441941, -76.606308))
-                    .width(4)
-                    .color(Color.RED));
-
-        }
-
-        else {
-
-            //popayan
-            LatLng popayan = new LatLng(2.441941, -76.606308);
-            mMap.addMarker(new MarkerOptions().position(popayan).title("Ciudad de Popayán").snippet("Lugar de las dulces rutas"));
-
-            //la fresa
-            LatLng fresa = new LatLng(2.442228, -76.608934);
-            mMap.addMarker(new MarkerOptions().position(fresa).title("La Fresa").snippet("mmm").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
-
-            //helados de paila
-            LatLng paila = new LatLng(2.440024, -76.609459);
-            mMap.addMarker(new MarkerOptions().position(paila).title("Helados de paila").snippet("mmm").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
-
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(popayan, 15));
-
-            Polyline line = mMap.addPolyline(new PolylineOptions()
-                    .add(new LatLng(2.441941, -76.606308),new LatLng(2.441559, -76.606913), new LatLng(2.441862, -76.607787),new LatLng(2.442760, -76.607455), new LatLng(2.443050, -76.608326), new LatLng(2.443326, -76.609180), new LatLng(2.442418, -76.609506), new LatLng(2.442136, -76.608660), new LatLng(2.441266, -76.608993), new LatLng(2.440535, -76.609273), new LatLng(2.439623, -76.609610), new LatLng(2.439365, -76.608714), new LatLng(2.439069, -76.607836), new LatLng(2.439935, -76.607518), new LatLng(2.439622, -76.606635), new LatLng(2.440395, -76.606331), new LatLng(2.441291, -76.606030), new LatLng(2.441941, -76.606308))
-                    .width(4)
-                    .color(Color.RED));
-        }
-*/
-
-
-
-    }
-
-    private void mostrar_ruta(GoogleMap googleMap) {
 
         //popayan - parque caldas
         LatLng popayan = new LatLng(2.441941, -76.606308);
@@ -223,7 +150,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         Polyline line = mMap.addPolyline(new PolylineOptions()
                 //.add(new LatLng(list.get(0).getLatitud(), list.get(0).getLongitud()), new LatLng(2.442470, -76.606555), new LatLng(2.443301, -76.606278), new LatLng(2.443019, -76.605388), new LatLng(2.443584, -76.605176), new LatLng(2.443782, -76.605098), new LatLng(2.443806, -76.605086), new LatLng(2.443786, -76.604890), new LatLng(2.443808, -76.604846), new LatLng(2.443616, -76.604189), new LatLng(2.443368, -76.603355), new LatLng(2.444216, -76.603054), new LatLng(2.443918, -76.602209), new LatLng(2.443630, -76.601296), new LatLng(2.444077, -76.601203), new LatLng(2.44407, -76.60112))
-                .add(new LatLng(list.get(0).getLatitud(), list.get(0).getLongitud()), new LatLng(2.442470, -76.606555), new LatLng(2.443301, -76.606278), new LatLng(2.443019, -76.605388), new LatLng(2.443584, -76.605176), new LatLng(2.443782, -76.605098), new LatLng(2.443806, -76.605086), new LatLng(2.443786, -76.604890), new LatLng(2.443808, -76.604846), new LatLng(2.443616, -76.604189), new LatLng(2.443368, -76.603355), new LatLng(2.444216, -76.603054), new LatLng(2.443918, -76.602209), new LatLng(2.443630, -76.601296), new LatLng(2.444077, -76.601203), new LatLng(2.44407, -76.60112))
+                .add(new LatLng(list.get(0).getLatitud(), list.get(0).getLongitud()), new LatLng(list.get(1).getLatitud(), list.get(1).getLongitud()), new LatLng(2.443301, -76.606278), new LatLng(2.443019, -76.605388), new LatLng(2.443584, -76.605176), new LatLng(2.443782, -76.605098), new LatLng(2.443806, -76.605086), new LatLng(2.443786, -76.604890), new LatLng(2.443808, -76.604846), new LatLng(2.443616, -76.604189), new LatLng(2.443368, -76.603355), new LatLng(2.444216, -76.603054), new LatLng(2.443918, -76.602209), new LatLng(2.443630, -76.601296), new LatLng(2.444077, -76.601203), new LatLng(2.44407, -76.60112))
                 .width(4)
                 .color(Color.RED));
 
