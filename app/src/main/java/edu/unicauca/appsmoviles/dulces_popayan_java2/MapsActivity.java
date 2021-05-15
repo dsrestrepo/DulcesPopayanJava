@@ -111,7 +111,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     for(DataSnapshot dataSnapshot: snapshot.getChildren()){
                         Punto punto = dataSnapshot.getValue(Punto.class);
                         list.add(punto);
-                        System.out.println(list.get(0).getLongitud());
+                        //System.out.println(list.get(0).getLongitud());
                     }
                     mostrar_ruta(googleMap, list);
                 }
@@ -127,7 +127,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private void mostrar_ruta(GoogleMap googleMap, ArrayList<Punto> list) {
 
         //location
-        miUbicacion();
+        //miUbicacion();
 
         //popayan - parque caldas
         LatLng popayan = new LatLng(2.441941, -76.606308);
@@ -148,11 +148,33 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(popayan, 15));
 
+        for (int i = 0; i < list.size() ; i++) {
+            if (i == (list.size() -1)){
+                Polyline line = mMap.addPolyline(new PolylineOptions()
+                        .add(
+                                new LatLng(list.get(i).getLatitud(), list.get(i).getLongitud()))
+                        .width(4)
+                        .color(Color.RED));
+
+            }
+            else {
+                Polyline line = mMap.addPolyline(new PolylineOptions()
+                        //.add(new LatLng(2.441941, -76.606308), new LatLng(2.442470, -76.606555), new LatLng(2.443301, -76.606278), new LatLng(2.443019, -76.605388), new LatLng(2.443584, -76.605176), new LatLng(2.443782, -76.605098), new LatLng(2.443806, -76.605086), new LatLng(2.443786, -76.604890), new LatLng(2.443808, -76.604846), new LatLng(2.443616, -76.604189), new LatLng(2.443368, -76.603355), new LatLng(2.444216, -76.603054), new LatLng(2.443918, -76.602209), new LatLng(2.443630, -76.601296), new LatLng(2.444077, -76.601203), new LatLng(2.44407, -76.60112))
+                        .add(
+                                new LatLng(list.get(i).getLatitud(), list.get(i).getLongitud()), new LatLng(list.get(i + 1).getLatitud(), list.get(i + 1).getLongitud()))
+                        .width(4)
+                        .color(Color.RED));
+            }
+        }
+
+
         Polyline line = mMap.addPolyline(new PolylineOptions()
-                //.add(new LatLng(list.get(0).getLatitud(), list.get(0).getLongitud()), new LatLng(2.442470, -76.606555), new LatLng(2.443301, -76.606278), new LatLng(2.443019, -76.605388), new LatLng(2.443584, -76.605176), new LatLng(2.443782, -76.605098), new LatLng(2.443806, -76.605086), new LatLng(2.443786, -76.604890), new LatLng(2.443808, -76.604846), new LatLng(2.443616, -76.604189), new LatLng(2.443368, -76.603355), new LatLng(2.444216, -76.603054), new LatLng(2.443918, -76.602209), new LatLng(2.443630, -76.601296), new LatLng(2.444077, -76.601203), new LatLng(2.44407, -76.60112))
-                .add(new LatLng(list.get(0).getLatitud(), list.get(0).getLongitud()), new LatLng(list.get(1).getLatitud(), list.get(1).getLongitud()), new LatLng(2.443301, -76.606278), new LatLng(2.443019, -76.605388), new LatLng(2.443584, -76.605176), new LatLng(2.443782, -76.605098), new LatLng(2.443806, -76.605086), new LatLng(2.443786, -76.604890), new LatLng(2.443808, -76.604846), new LatLng(2.443616, -76.604189), new LatLng(2.443368, -76.603355), new LatLng(2.444216, -76.603054), new LatLng(2.443918, -76.602209), new LatLng(2.443630, -76.601296), new LatLng(2.444077, -76.601203), new LatLng(2.44407, -76.60112))
+                //.add(new LatLng(2.441941, -76.606308), new LatLng(2.442470, -76.606555), new LatLng(2.443301, -76.606278), new LatLng(2.443019, -76.605388), new LatLng(2.443584, -76.605176), new LatLng(2.443782, -76.605098), new LatLng(2.443806, -76.605086), new LatLng(2.443786, -76.604890), new LatLng(2.443808, -76.604846), new LatLng(2.443616, -76.604189), new LatLng(2.443368, -76.603355), new LatLng(2.444216, -76.603054), new LatLng(2.443918, -76.602209), new LatLng(2.443630, -76.601296), new LatLng(2.444077, -76.601203), new LatLng(2.44407, -76.60112))
+                .add(
+                        new LatLng(2.443019, -76.605388), new LatLng(2.443019, -76.605388), new LatLng(2.443584, -76.605176), new LatLng(2.443782, -76.605098), new LatLng(2.443806, -76.605086), new LatLng(2.443786, -76.604890), new LatLng(2.443808, -76.604846), new LatLng(2.443616, -76.604189), new LatLng(2.443368, -76.603355), new LatLng(2.444216, -76.603054), new LatLng(2.443918, -76.602209), new LatLng(2.443630, -76.601296), new LatLng(2.444077, -76.601203), new LatLng(2.44407, -76.60112))
                 .width(4)
                 .color(Color.RED));
+
 
     }
 
