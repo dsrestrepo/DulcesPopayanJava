@@ -145,6 +145,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng chepa = new LatLng(2.4435641, -76.6039177);
         mMap.addMarker(new MarkerOptions().position(chepa).title("Aplanchados doña chepa").snippet("mmm").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
 
+        //colonial postres
+        LatLng colonial = new LatLng(2.442674, -76.601308);
+        mMap.addMarker(new MarkerOptions().position(colonial).title("Colonial Postres").snippet("mmm").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
+
+        //El reposo
+        LatLng reposo = new LatLng(2.441729, -76.601977);
+        mMap.addMarker(new MarkerOptions().position(reposo).title("Helado, Fruta y Cafe").snippet("mmm").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
+
+        //la fresa
+        LatLng fresa = new LatLng(2.442228, -76.608934);
+        mMap.addMarker(new MarkerOptions().position(fresa).title("La Fresa").snippet("mmm").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
+
+        //helados de paila
+        LatLng paila = new LatLng(2.440024, -76.609459);
+        mMap.addMarker(new MarkerOptions().position(paila).title("Helados de paila").snippet("mmm").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(popayan, 15));
 
@@ -168,12 +183,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
 
-        Polyline line = mMap.addPolyline(new PolylineOptions()
-                //.add(new LatLng(2.441941, -76.606308), new LatLng(2.442470, -76.606555), new LatLng(2.443301, -76.606278), new LatLng(2.443019, -76.605388), new LatLng(2.443584, -76.605176), new LatLng(2.443782, -76.605098), new LatLng(2.443806, -76.605086), new LatLng(2.443786, -76.604890), new LatLng(2.443808, -76.604846), new LatLng(2.443616, -76.604189), new LatLng(2.443368, -76.603355), new LatLng(2.444216, -76.603054), new LatLng(2.443918, -76.602209), new LatLng(2.443630, -76.601296), new LatLng(2.444077, -76.601203), new LatLng(2.44407, -76.60112))
-                .add(
-                        new LatLng(2.443019, -76.605388), new LatLng(2.443019, -76.605388), new LatLng(2.443584, -76.605176), new LatLng(2.443782, -76.605098), new LatLng(2.443806, -76.605086), new LatLng(2.443786, -76.604890), new LatLng(2.443808, -76.604846), new LatLng(2.443616, -76.604189), new LatLng(2.443368, -76.603355), new LatLng(2.444216, -76.603054), new LatLng(2.443918, -76.602209), new LatLng(2.443630, -76.601296), new LatLng(2.444077, -76.601203), new LatLng(2.44407, -76.60112))
-                .width(4)
-                .color(Color.RED));
 
 
     }
