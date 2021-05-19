@@ -127,7 +127,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private void mostrar_ruta(GoogleMap googleMap, ArrayList<Punto> list) {
 
         //location
-        //miUbicacion();
+        miUbicacion();
 
         //popayan - parque caldas
         LatLng popayan = new LatLng(2.441941, -76.606308);
