@@ -8,15 +8,20 @@ public class Tienda {
     private String descripcion;
     private String url;
 
+    private double latitud;
+    private double longitud;
+
     public Tienda() {
     }
 
-    public Tienda(String nombre, String Id, String dulces, String descripcion, String url) {
+    public Tienda(String nombre, String Id, String dulces, String descripcion, String url, double latitud, double longitud) {
         this.nombre = nombre;
         this.Id = Id;
         this.url = url;
         this.dulces = dulces;
         this.descripcion = descripcion;
+        this.latitud = latitud;
+        this.longitud = longitud;
     }
 
     public String getUrl() {
@@ -57,5 +62,21 @@ public class Tienda {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public double getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(double latitud) {
+        this.latitud = latitud;
+    }
+
+    public double getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(double longitud) {
+        this.longitud = longitud;
     }
 }

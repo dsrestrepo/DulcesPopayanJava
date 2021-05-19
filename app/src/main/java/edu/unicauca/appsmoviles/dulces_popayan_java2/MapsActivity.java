@@ -43,8 +43,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     Bundle rutas;
     DatabaseReference ref;
+    DatabaseReference ref2;
     Activity activity;
     ArrayList<Punto> list;
+    ArrayList<Tienda> listTienda;
     Punto punto_aux;
     private Marker marcador;
     double lat = 0.0;
@@ -59,14 +61,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
 
-
-
-        //System.out.println(list.get(0).getLongitud());
-        //System.out.println(list.get(0).getLatitud());
-
-
-
-
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -77,17 +71,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         list = new ArrayList<Punto>();
+        listTienda = new ArrayList<Tienda>();
 
         rutas = getIntent().getExtras();
         String selector = rutas.getString("id");
 
         // database
-        ref = FirebaseDatabase.getInstance().getReference().child("Rutas").child(selector).child(selector); // el bueno
-        //ref = FirebaseDatabase.getInstance().getReference().child("Rutas").child("Ruta1").child("Ruta1"); //prueba
+        ref = FirebaseDatabase.getInstance().getReference().child("Rutas").child(selector).child(selector);
+        ref2 = FirebaseDatabase.getInstance().getReference().child("Tiendas");
 /*
         System.out.println(ref);
         // get database data
-        ref.addValueEventListener(new ValueEventListener() {
+        ref2.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
@@ -113,7 +108,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         list.add(punto);
                         //System.out.println(list.get(0).getLongitud());
                     }
-                    mostrar_ruta(googleMap, list);
+                    ref2.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.exists()){
+                                for(DataSnapshot dataSnapshot: snapshot.getChildren()){
+                                    Tienda tienda = dataSnapshot.getValue(Tienda.class);
+                                    listTienda.add(tienda);
+                                }
+                                // show Roue
+                                mostrar_ruta(googleMap, list, listTienda);
+                            }
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                        }
+                    });
+
                 }
             }
             @Override
@@ -124,7 +135,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-    private void mostrar_ruta(GoogleMap googleMap, ArrayList<Punto> list) {
+    private void mostrar_ruta(GoogleMap googleMap, ArrayList<Punto> list, ArrayList<Tienda> listTienda) {
 
         //location
         miUbicacion();
@@ -137,29 +148,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng morro = new LatLng(2.44407, -76.60112);
         mMap.addMarker(new MarkerOptions().position(morro).title("El Morro").snippet("Mira un atardecer").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
 
-        //caucana de dulces
-        LatLng caucana = new LatLng(2.4432516, -76.6059773);
-        mMap.addMarker(new MarkerOptions().position(caucana).title("Caucana de dulces tipicos").snippet("mmm").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
+        for (int i = 0; i < listTienda.size() ; i++) {
 
-        //doña chepa
-        LatLng chepa = new LatLng(2.4435641, -76.6039177);
-        mMap.addMarker(new MarkerOptions().position(chepa).title("Aplanchados doña chepa").snippet("mmm").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
+            LatLng location = new LatLng(listTienda.get(i).getLatitud(), listTienda.get(i).getLongitud());
+            mMap.addMarker(new MarkerOptions().position(location).title(listTienda.get(i).getNombre()).snippet(listTienda.get(i).getDulces()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
 
-        //colonial postres
-        LatLng colonial = new LatLng(2.442674, -76.601308);
-        mMap.addMarker(new MarkerOptions().position(colonial).title("Colonial Postres").snippet("mmm").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
 
-        //El reposo
-        LatLng reposo = new LatLng(2.441729, -76.601977);
-        mMap.addMarker(new MarkerOptions().position(reposo).title("Helado, Fruta y Cafe").snippet("mmm").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
+        }
 
-        //la fresa
-        LatLng fresa = new LatLng(2.442228, -76.608934);
-        mMap.addMarker(new MarkerOptions().position(fresa).title("La Fresa").snippet("mmm").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
 
-        //helados de paila
-        LatLng paila = new LatLng(2.440024, -76.609459);
-        mMap.addMarker(new MarkerOptions().position(paila).title("Helados de paila").snippet("mmm").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
+
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(popayan, 15));
 
