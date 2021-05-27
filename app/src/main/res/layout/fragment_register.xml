@@ -25,9 +25,10 @@
 
     <EditText
         android:id="@+id/email"
-        android:layout_width="289dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="60dp"
+        android:layout_width="match_parent"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_height="50dp"
         android:layout_marginTop="124dp"
         android:ems="10"
         android:inputType="textEmailAddress"
@@ -39,9 +40,10 @@
 
     <EditText
         android:id="@+id/password"
-        android:layout_width="289dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="60dp"
+        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
         android:layout_marginTop="40dp"
         android:ems="10"
         android:inputType="textPassword"
@@ -52,9 +54,10 @@
 
     <EditText
         android:id="@+id/password2"
-        android:layout_width="291dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="60dp"
+        android:layout_width="match_parent"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_height="50dp"
         android:layout_marginTop="44dp"
         android:background="#90ffffff"
         android:ems="10"

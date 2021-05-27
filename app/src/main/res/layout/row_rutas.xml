@@ -32,7 +32,6 @@
         android:id="@+id/ver_ruta"
         android:layout_width="75dp"
         android:layout_height="41dp"
-
         android:backgroundTint="#5C4848"
         android:text="@string/see_button"
         android:textSize="15dp"

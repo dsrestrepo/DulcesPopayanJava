@@ -28,6 +28,7 @@ public class LoginFragment extends Fragment {
 
     private FirebaseAuth mAuth;
     EditText tv_email,tv_password;
+    TextView logout_header;
     Button login;
     TextView username;
     @Override
@@ -47,6 +48,7 @@ public class LoginFragment extends Fragment {
         tv_email = root.findViewById(R.id.email);
         tv_password = root.findViewById(R.id.password);
         username = root.findViewById(R.id.username);
+        logout_header = root.findViewById(R.id.text_slideshow);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
@@ -55,7 +57,7 @@ public class LoginFragment extends Fragment {
             String email = ((FirebaseUser) user).getEmail();
             tv_email.setVisibility(View.INVISIBLE);
             tv_password.setVisibility(View.INVISIBLE);
-
+            logout_header.setText("Logout");
             username.setText(email);
 
             // Check if user's email is verified

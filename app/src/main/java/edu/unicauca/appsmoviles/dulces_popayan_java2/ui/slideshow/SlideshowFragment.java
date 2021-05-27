@@ -53,6 +53,8 @@ public class SlideshowFragment extends Fragment {
         adapter = new AdapterTienda(list,getActivity());
         rv.setAdapter(adapter);
 
+        search.setQueryHint("Dulces / candies");
+
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

@@ -32,14 +32,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_slideshow" />
 
+
     <TextView
         android:id="@+id/text_info2"
-        android:layout_width="322dp"
-        android:layout_height="47dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|right"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:background="#85ffffff"
         android:text="David Restrepo - dsrestrepo@unicauca.edu.co"
-        android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="@color/black"
         android:textColorLink="#3C1313"
@@ -47,19 +49,21 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.133" />
+        app:layout_constraintVertical_bias="0.257" />
 
     <TextView
         android:id="@+id/text_info3"
-        android:layout_width="322dp"
-        android:layout_height="47dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|right"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:background="#85ffffff"
-        android:text="Mario Camilo Burbano - mcburbano@unicauca.edu.co"
-        android:textAlignment="center"
+        android:text="Camilo Burbano - mcburbano@unicauca.edu.co"
+
         android:textAllCaps="false"
         android:textColor="@color/black"
         android:textColorLink="#3C1313"
@@ -67,17 +71,17 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.543"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_info2"
-        app:layout_constraintVertical_bias="0.119" />
-
+        app:layout_constraintVertical_bias="0.099" />
 
     <TextView
         android:id="@+id/information"
-        android:layout_width="306dp"
-        android:layout_height="127dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:background="#99ffffff"
         android:text="@string/information"
         android:textAlignment="center"
@@ -86,12 +90,13 @@
         android:textColorLink="#3C1313"
         android:textSize="15sp"
         android:textStyle="bold"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.543"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_info3"
-        app:layout_constraintVertical_bias="0.432" />
+        app:layout_constraintVertical_bias="0.268" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
