@@ -193,7 +193,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         {
             marcador = mMap.addMarker(new MarkerOptions()
                     .position(coordenas)
-                    .title("aqui estas")
+                    .title("aquí estás")
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
             mMap.animateCamera(miUbicacion);
         }
